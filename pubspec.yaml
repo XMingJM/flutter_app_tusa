@@ -14,12 +14,12 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
+  firebase_messaging: ^6.0.9
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
@@ -28,11 +28,16 @@ dependencies:
   flutter_svg: 0.14.2
   firebase_core: any
   firebase_database: ^3.1.0
-
+  intl: 0.16.0
+  geolocator: ^5.1.0
+  google_sign_in: ^4.5.1
+  image_picker: ^0.6.0+17
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  firebase_storage:
+  flutter_local_notifications:
+  percent_indicator: ^2.1.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

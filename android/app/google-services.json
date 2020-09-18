@@ -42,43 +42,6 @@
           ]
         }
       }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:176948783456:android:ed78fe5dd9cb1f42cd5605",
-        "android_client_info": {
-          "package_name": "com.example.flutterapptusa"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "176948783456-kg9m1avahnso56frt18kir5uesnjh95s.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.flutterapptusa",
-            "certificate_hash": "21f4b2d1eea84a9ca232994c9c715a10180c8a95"
-          }
-        },
-        {
-          "client_id": "176948783456-rpplanqocbr3csfo73ekk632674ls3ng.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBovXHnDz7z8SoUDHHgnk6j1FJaXMX-K9U"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "176948783456-rpplanqocbr3csfo73ekk632674ls3ng.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
     }
   ],
   "configuration_version": "1"

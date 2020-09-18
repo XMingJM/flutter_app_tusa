@@ -1,18 +1,14 @@
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_app_tusa/ui/m_appbar.dart';
 import 'package:flutter_app_tusa/ui/m_colors.dart';
 import 'package:flutter_app_tusa/ui/m_text_styles.dart';
 
-
 class ChatRoom extends StatefulWidget {
   @override
- // NotificationModelVO notificationModelVO;
+  // NotificationModelVO notificationModelVO;
 
- // Chatroom(this.notificationModelVO);
+  // Chatroom(this.notificationModelVO);
 
   @override
   ChatRoomState createState() => ChatRoomState();
@@ -20,46 +16,42 @@ class ChatRoom extends StatefulWidget {
 
 //isLoadMoreAvailable
 class ChatRoomState extends State<ChatRoom> {
+  final DatabaseReference database =
+      FirebaseDatabase.instance.reference().child("chatHistory");
 
-  final DatabaseReference database = FirebaseDatabase.instance.reference().child("chatHistory");
-
-
-  final db =FirebaseDatabase.instance.reference().child("chatHistory");
+  final db = FirebaseDatabase.instance.reference().child("chatHistory");
 
   TextEditingController editingController = TextEditingController();
-  sendData(String text){
-    database.push().set({
-      'name':'Swain',
-      'message': text
 
-    });
+  sendData(String text) {
+    database.push().set({'name': 'Swain', 'message': text});
   }
+
 //-------------------------
   ///Retrive data
 
   ///
-
-
-
 
   //-----------------------------
   final scrollController = ScrollController();
   bool isLoading = false;
   int pagingNo = 1;
   int newMessage = 0;
- // NotificationModelVO notificationModelVO;
+
+  // NotificationModelVO notificationModelVO;
   void initState() {
     super.initState();
-  //  notificationModelVO = widget.notificationModelVO;
+    //  notificationModelVO = widget.notificationModelVO;
 //isLoadMoreAvailable
     scrollController.addListener(() {
-      if (scrollController.position.maxScrollExtent == scrollController.offset ) {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.offset) {
         if (!isLoading) {
           setState(() {
             isLoading = true;
           });
 
-       //   loadMore();
+          //   loadMore();
         }
       }
     });
@@ -87,31 +79,34 @@ class ChatRoomState extends State<ChatRoom> {
 //        appBar: MAppBar.forOthersWithCloseButton(
 //          context: context,
 //        ),
-      appBar:AppBar(
-        title: const Text('Next page'),
-      ),
+        appBar: AppBar(
+          title: const Text('Next page'),
+        ),
         body: Center(
-   child: Container(
-
-     child: Column(
-       children: <Widget>[
-         Container (
-           padding: new EdgeInsets.only(top: 20.0, bottom: 5.0,left: 20,right:20),
-           child:   Container(
-             padding: new EdgeInsets.only(top: 12.0, bottom: 14.0,left: 14,right:26),
-             decoration: new BoxDecoration(color: MColors.brown, borderRadius: new BorderRadius.all(Radius.circular(6.0))),
-
-             child: Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: <Widget>[
-                 new Container(
-                   child: Container(
-                     child: new Text(
-                       "Test",
-                       style: MTextStyles.headerTextStyle,
-                     ),
-                   ),
-                 ),
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  padding: new EdgeInsets.only(
+                      top: 20.0, bottom: 5.0, left: 20, right: 20),
+                  child: Container(
+                    padding: new EdgeInsets.only(
+                        top: 12.0, bottom: 14.0, left: 14, right: 26),
+                    decoration: new BoxDecoration(
+                        color: MColors.brown,
+                        borderRadius:
+                            new BorderRadius.all(Radius.circular(6.0))),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        new Container(
+                          child: Container(
+                            child: new Text(
+                              "Test",
+                              style: MTextStyles.headerTextStyle,
+                            ),
+                          ),
+                        ),
 //                 new Container(
 //
 //                   padding: EdgeInsets.fromLTRB(0.0, 5, 0, 0),
@@ -124,113 +119,84 @@ class ChatRoomState extends State<ChatRoom> {
 //                   ),
 //
 //                 ),
-
-
-               ],
-             ),
-           ),
-
-         ),
-         Expanded(
-
-           child: Container(
-             color: MColors.flamingo,
-             margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-             child: Column(
-               children: <Widget>[
-                 Expanded(
-                   child: Container(
-                    // height: 100,
-                     color: MColors.white,
-                     margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-
-
-
-                   ),
-                 ),
-
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      height: 100,
-                     color: MColors.ivory,
-                     margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-
-                      child: TextField(
-                        autofocus: true,
-                         controller: editingController,
-                        onChanged: (value) {
-                          //  filterSearchResults(value);
-                        },
-
-                      ),
-
-
-             ),
-
-
-
-                  ),      Container(
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    color: MColors.flamingo,
                     margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                    child: RaisedButton(
-                      //    splashColor: SSColors.rippleEffectColor,
-                      child: Text("Send", style: MTextStyles.headerTextStyle),
-                 //     onPressed: () => sendData(),
-                      onPressed: ()  {
-                        print("Test:"+ editingController.text);
-                        sendData(editingController.text);
-
-
-
-
-
-                        db.once().then((DataSnapshot snapshot){
-                          Map<dynamic, dynamic> values=snapshot.value;
-                          print("values"+values['name']);
-                        });
-
-
-
-
-
-
-
-
-
-                        editingController.clear();
-                        //send to firebase
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            // height: 100,
+                            color: MColors.white,
+                            margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                          ),
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Container(
+                                height: 100,
+                                color: MColors.ivory,
+                                margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                child: TextField(
+                                  autofocus: true,
+                                  controller: editingController,
+                                  onChanged: (value) {
+                                    //  filterSearchResults(value);
+                                  },
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                              child: RaisedButton(
+                                //    splashColor: SSColors.rippleEffectColor,
+                                child: Text("Send",
+                                    style: MTextStyles.headerTextStyle),
+                                //     onPressed: () => sendData(),
+                                onPressed: () {
+                                  print("Test:" + editingController.text);
+                                  sendData(editingController.text);
+                                  db.once().then((DataSnapshot snapshot) {
+                                    Map<dynamic, dynamic> values =
+                                        snapshot.value;
+                                    print("values" + values['name']);
+                                  });
+                                  editingController.clear();
+                                  //send to firebase
 //                        Navigator.push(
 //                          context,
 //                          MaterialPageRoute(builder: (context) => ChatRoom()),
 //                        );
-                      },
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      color: MColors.asher,
+                                },
+                                onLongPress: () => {
+                                  ChatRoom()
+                                },
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                color: MColors.asher,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-               ],
-             ),
-
-
-           ),
-
-         ),
-
-       ],
-     ),
-   ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
       onRefresh: () async {
-        setState(() {
-
-        });
-      // _requestGetNotification(context);
+        setState(() {});
+        // _requestGetNotification(context);
       },
     );
   }
